@@ -1,0 +1,77 @@
+{
+  "products": [
+    {
+      "id": "56dccc32-e277-4f76-9176-a8d0152e8dfb",
+      "name": "لب أبيض جامبو",
+      "badge": "من المحصول الجديد",
+      "image": "https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=700&q=80",
+      "price": 95,
+      "active": true,
+      "category": "اللب",
+      "stock_kg": 0,
+      "description": "حبة كبيرة ومقرمشة • 250 جرام",
+      "price_per_kg": 380
+    },
+    {
+      "id": "6d3ebbd5-a892-4044-9f5c-a4c0dc9a99e1",
+      "name": "لب قرع محمص",
+      "badge": "طبيعي ١٠٠٪",
+      "image": "https://images.unsplash.com/photo-1574570173580-78a6e7d1afcb?auto=format&fit=crop&w=700&q=80",
+      "price": 110,
+      "active": true,
+      "category": "اللب",
+      "stock_kg": 0,
+      "description": "تحميص خفيف من غير إضافات • 200 جرام",
+      "price_per_kg": 550
+    },
+    {
+      "id": "525c4493-a017-4a81-a519-7202ade8791b",
+      "name": "فول سوداني بلدي",
+      "badge": "بلدي",
+      "image": "https://images.unsplash.com/photo-1567892737950-30c4db37cd89?auto=format&fit=crop&w=700&q=80",
+      "price": 75,
+      "active": true,
+      "category": "المكسرات",
+      "stock_kg": 0,
+      "description": "من أرضنا، طازة ومقرمش • 250 جرام",
+      "price_per_kg": 300
+    },
+    {
+      "id": "0514394a-50dc-4b64-af03-936c34871ff1",
+      "name": "حمص محمص",
+      "badge": "سناك صحي",
+      "image": "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?auto=format&fit=crop&w=700&q=80",
+      "price": 65,
+      "active": true,
+      "category": "المحاصيل",
+      "stock_kg": 0,
+      "description": "سناك خفيف بطعم زمان • 200 جرام",
+      "price_per_kg": 325
+    },
+    {
+      "id": "7b046e4d-c2df-4ca1-b752-fb4e07e59c00",
+      "name": "ذرة فشار بلدي",
+      "badge": "من المزرعة",
+      "image": "https://images.unsplash.com/photo-1578849278619-e73505e9610f?auto=format&fit=crop&w=700&q=80",
+      "price": 55,
+      "active": true,
+      "category": "المحاصيل",
+      "stock_kg": 0,
+      "description": "حبوب كاملة من محصول الموسم • 500 جرام",
+      "price_per_kg": 110
+    },
+    {
+      "id": "368ec2a4-241d-415a-a046-6d1b9b0a6fe1",
+      "name": "لب سوري فاخر",
+      "badge": "الأكثر طلبًا",
+      "image": "https://images.unsplash.com/photo-1599599810694-b5b37304c041?auto=format&fit=crop&w=700&q=80",
+      "price": 85,
+      "active": true,
+      "category": "اللب",
+      "stock_kg": 1500,
+      "description": "محمص على أصوله • 250 جرام",
+      "price_per_kg": 340
+    }
+  ],
+  "exported_at": "2026-11-08T23:04:57.622206+00:00"
+}
