@@ -1,0 +1,92 @@
+{
+ "note": "Credits for the photographs in this folder: photos.mjs credits prints the footer block for the ones the pages use.",
+ "photos": [
+  {
+   "file": "photo-f86937728.jpg",
+   "files": [
+    "photo-f86937728-500.jpg",
+    "photo-f86937728-960.jpg",
+    "photo-f86937728.jpg"
+   ],
+   "id": "f86937728",
+   "alt": "Whole Sunflower seed",
+   "by": "Bobyellow",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Whole_Sunflower_seed.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f85644637.jpg",
+   "files": [
+    "photo-f85644637-500.jpg",
+    "photo-f85644637-960.jpg",
+    "photo-f85644637.jpg"
+   ],
+   "id": "f85644637",
+   "alt": "Sunflower seeds - white. img 09",
+   "by": "Dmitry Makeev",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Sunflower_seeds_-_white._img_09.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f29509141.jpg",
+   "files": [
+    "photo-f29509141-500.jpg",
+    "photo-f29509141-960.jpg",
+    "photo-f29509141.jpg"
+   ],
+   "id": "f29509141",
+   "alt": "Pumpkin Seeds macro 1",
+   "by": "Daniel Schwen",
+   "licence": "CC BY 3.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Pumpkin_Seeds_macro_1.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f62609564-960.jpg",
+   "files": [
+    "photo-f62609564-500.jpg",
+    "photo-f62609564-960.jpg"
+   ],
+   "id": "f62609564",
+   "alt": "Peanuts (24285094049)",
+   "by": "NIAID",
+   "licence": "CC BY 2.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Peanuts_(24285094049).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f87521449-960.jpg",
+   "files": [
+    "photo-f87521449-500.jpg",
+    "photo-f87521449-960.jpg"
+   ],
+   "id": "f87521449",
+   "alt": "Maah korai",
+   "by": "NabaJyoti",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Maah_korai.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f9506024-960.jpg",
+   "files": [
+    "photo-f9506024-500.jpg",
+    "photo-f9506024-960.jpg"
+   ],
+   "id": "f9506024",
+   "alt": "Maize Corn",
+   "by": "Joel Penner from Winnipeg, Canada",
+   "licence": "CC BY 2.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Maize_Corn.jpg",
+   "source": "Wikimedia Commons"
+  }
+ ]
+}

@@ -5,15 +5,22 @@ export const GOVERNORATES = [
   "الشرقية", "جنوب سيناء", "كفر الشيخ", "مطروح", "الأقصر", "قنا", "شمال سيناء", "سوهاج",
 ];
 
-const SUNFLOWER = "https://hips.hearstapps.com/hmg-prod/images/sunflower-seeds-1528916973.jpg?crop=0.6666666666666666xw%3A1xh%3Bcenter%2Ctop";
-// Display images keyed by product id (DB image column is left untouched).
+// Product-matched photo stand-ins; the database values remain untouched.
 export const PRODUCT_IMAGES: Record<string, string> = {
-  "368ec2a4-241d-415a-a046-6d1b9b0a6fe1": SUNFLOWER,
-  "56dccc32-e277-4f76-9176-a8d0152e8dfb": SUNFLOWER,
-  "6d3ebbd5-a892-4044-9f5c-a4c0dc9a99e1": "https://www.dryfruithub.com/image/cache/catalog/pumpkin%20seeds%207-550x550w.jpg",
-  "525c4493-a017-4a81-a519-7202ade8791b": "https://cf-img-a-in.tosshub.com/sites/visualstory/wp/2024/08/cropped-GettyImages-155420683-scaled-1.jpg?size=900%3A1200",
-  "0514394a-50dc-4b64-af03-936c34871ff1": "https://storage.googleapis.com/peppermint-cdn/myplate.food-recipe-images/roasted-chickpeas-garbanzo-beans.jpg",
-  "7b046e4d-c2df-4ca1-b752-fb4e07e59c00": "https://media.s-bol.com/J21GZRJRlNnJ/52RN6R/550x515.jpg",
+  "368ec2a4-241d-415a-a046-6d1b9b0a6fe1": "/assets/products/photo-f86937728-960.jpg",
+  "56dccc32-e277-4f76-9176-a8d0152e8dfb": "/assets/products/photo-f85644637-960.jpg",
+  "6d3ebbd5-a892-4044-9f5c-a4c0dc9a99e1": "/assets/products/photo-f29509141-960.jpg",
+  "525c4493-a017-4a81-a519-7202ade8791b": "/assets/products/photo-f62609564-960.jpg",
+  "0514394a-50dc-4b64-af03-936c34871ff1": "/assets/products/photo-f87521449-960.jpg",
+  "7b046e4d-c2df-4ca1-b752-fb4e07e59c00": "/assets/products/photo-f9506024-960.jpg",
+};
+export const PRODUCT_IMAGE_FALLBACKS: Record<string, string> = {
+  "368ec2a4-241d-415a-a046-6d1b9b0a6fe1": "/assets/products/photo-f86937728-500.jpg",
+  "56dccc32-e277-4f76-9176-a8d0152e8dfb": "/assets/products/photo-f85644637-500.jpg",
+  "6d3ebbd5-a892-4044-9f5c-a4c0dc9a99e1": "/assets/products/photo-f29509141-500.jpg",
+  "525c4493-a017-4a81-a519-7202ade8791b": "/assets/products/photo-f62609564-500.jpg",
+  "0514394a-50dc-4b64-af03-936c34871ff1": "/assets/products/photo-f87521449-500.jpg",
+  "7b046e4d-c2df-4ca1-b752-fb4e07e59c00": "/assets/products/photo-f9506024-500.jpg",
 };
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -29,14 +36,36 @@ export function generateAccessCode(length = 12): string {
 }
 
 const AR_DIGITS = "٠١٢٣٤٥٦٧٨٩";
+const PERSIAN_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
+const normalizeNumerals = (v: unknown) => String(v ?? "").replace(/[٠-٩۰-۹]/g, (d) => {
+  const index = AR_DIGITS.indexOf(d);
+  return String(index >= 0 ? index : PERSIAN_DIGITS.indexOf(d));
+});
 export function normalizePhone(v: unknown): string {
-  return String(v ?? "").replace(/[٠-٩]/g, (d) => String(AR_DIGITS.indexOf(d))).replace(/\D/g, "");
+  return normalizeNumerals(v).replace(/\D/g, "");
 }
-export const isValidPhone = (p: string) => /^\d{11}$/.test(p);
+export const isValidPhone = (p: string) => /^\d{11,15}$/.test(p);
+
+/** Convert the customer's selected unit to the single kg unit stored in Postgres. */
+export function quantityToKg(v: unknown, unit: "kg" | "ton" = "kg"): number | null {
+  const quantity = parseKg(v);
+  if (quantity === null) return null;
+  const kg = unit === "ton" ? quantity * 1000 : quantity;
+  return Number.isFinite(kg) ? Math.round(kg * 1000) / 1000 : null;
+}
+
+/** Keep large stock and order quantities readable while the database stays in kg. */
+export function formatKg(v: unknown): { value: number; unit: "كجم" | "طن" } {
+  const kg = Number(v);
+  if (Number.isFinite(kg) && kg >= 1000) {
+    return { value: Math.round((kg / 1000) * 1000) / 1000, unit: "طن" };
+  }
+  return { value: Number.isFinite(kg) ? kg : 0, unit: "كجم" };
+}
 
 /** Positive kg with at most 3 decimals, else null. */
 export function parseKg(v: unknown): number | null {
-  const s = String(v ?? "").trim().replace(/[٠-٩]/g, (d) => String(AR_DIGITS.indexOf(d))).replace("٫", ".");
+  const s = normalizeNumerals(v).trim().replace("٫", ".");
   if (!/^\d+(\.\d{1,3})?$/.test(s)) return null;
   const n = Number(s);
   return n > 0 ? n : null;

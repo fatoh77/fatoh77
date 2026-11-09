@@ -7,7 +7,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "الأمين | خيرات الأرض لحد بابك" },
-      { name: "description", content: "لب وسناكس ومحاصيل مختارة من مزارعنا، متعبّية بحب وجاهزة توصلك طازة. الدفع عند الاستلام." },
+      { name: "description", content: "متجر الأمين لبيع اللب والمحاصيل بالجملة، مع أسعار بالكيلو وخيار إدخال الكمية بالكيلو أو بالطن." },
+      { name: "page-type", content: "product" },
+      { name: "site-kind", content: "other" },
       { property: "og:title", content: "الأمين | خيرات الأرض لحد بابك" },
       { property: "og:description", content: "لب وسناكس ومحاصيل مختارة من مزارعنا، توصيل لجميع المحافظات والدفع عند الاستلام." },
       { property: "og:type", content: "website" },
