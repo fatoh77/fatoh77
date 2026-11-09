@@ -44,7 +44,7 @@ const normalizeNumerals = (v: unknown) => String(v ?? "").replace(/[٠-٩۰-۹]/
 export function normalizePhone(v: unknown): string {
   return normalizeNumerals(v).replace(/\D/g, "");
 }
-export const isValidPhone = (p: string) => /^\d{11,15}$/.test(p);
+export const isValidPhone = (p: string) => /^\d{11,}$/.test(p);
 
 /** Convert the customer's selected unit to the single kg unit stored in Postgres. */
 export function quantityToKg(v: unknown, unit: "kg" | "ton" = "kg"): number | null {

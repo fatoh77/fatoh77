@@ -11,6 +11,6 @@ export const extraMarkup = `
 <div class="btn-row"><button type="button" class="button orange" id="success-track">تتبع طلبي</button><button type="button" class="button forest" id="success-home">الرجوع للرئيسية</button></div>
 </div></dialog>
 <dialog id="track-dialog"><div class="dialog-form"><div class="panel-title"><h2>استعلام عن طلبي</h2><button type="button" class="plain" data-close-dialog>×</button></div>
-<form id="track-form"><label>رقم الموبايل<input name="phone" type="tel" inputmode="numeric" maxlength="15" pattern="[0-9]{11,15}" required autocomplete="tel-national" placeholder="١١ رقمًا أو أكثر"/></label><button class="button orange wide" type="submit">اعرض كل طلباتي <span>←</span></button></form>
+<form id="track-form"><label>رقم الموبايل<input name="phone" type="tel" inputmode="numeric" pattern="[0-9]{11,}" required autocomplete="tel-national" placeholder="١١ رقمًا أو أكثر"/></label><button class="button orange wide" type="submit">اعرض كل طلباتي <span>←</span></button></form>
 <div id="track-area"></div>
 </div></dialog>`;

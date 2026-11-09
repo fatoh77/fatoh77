@@ -23,7 +23,7 @@ export function initStore() {
   const quantityLabel = (kg) => { const q = formatKg(kg); return `${num(q.value)} ${q.unit}`; };
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const cleanDesc = (d) => String(d || "مختار بعناية من خير أرضنا").replace(/\s*•\s*[\d٠-٩.,]+\s*(جرام|جم|كجم|كيلو)\s*$/, "");
-  const img = (p) => PRODUCT_IMAGES[p.id] || p.image;
+  const img = (p) => PRODUCT_IMAGES[p.id] || (String(p.image || "").startsWith("/assets/") ? p.image : "");
   const stockOf = (id) => Number(products.find((p) => String(p.id) === String(id))?.stock_kg) || 0;
   let toastTimer;
   function notify(text) { const t = $("#toast"); t.textContent = text; t.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 3500); }
@@ -65,8 +65,7 @@ export function initStore() {
     grid.innerHTML = list.map((p) => {
       const stock = Number(p.stock_kg) || 0;
       const productImage = img(p), backupImage = PRODUCT_IMAGE_FALLBACKS[p.id] || "";
-      const imageHost = productImage.startsWith("/assets/products/") ? "Wikimedia Commons" : (() => { try { return new URL(productImage, window.location.href).hostname; } catch { return ""; } })();
-      return `<article class="product-card"><div class="product-image"><img loading="lazy" src="${esc(productImage)}" alt="${esc(p.name)}" data-source="${esc(imageHost)}" data-subject="${esc(p.name)}" data-fallback="${esc(backupImage)}" referrerpolicy="no-referrer"><span class="image-unavailable-label" aria-hidden="true">صورة المحصول غير متاحة</span><span class="badge">${esc(p.category)}</span></div><div class="product-info"><h3>${esc(p.name)}</h3><p class="product-desc">${esc(cleanDesc(p.description))}</p><div class="product-price">${num(p.price_per_kg, 2)} <small>ج.م / كجم</small></div>${stock > 0
+      return `<article class="product-card"><div class="product-image"><img loading="lazy" src="${esc(productImage)}" alt="${esc(p.name)}" data-fallback="${esc(backupImage)}" referrerpolicy="no-referrer"><span class="image-unavailable-label" aria-hidden="true">صورة المحصول غير متاحة</span><span class="badge">${esc(p.category)}</span></div><div class="product-info"><h3>${esc(p.name)}</h3><p class="product-desc">${esc(cleanDesc(p.description))}</p><div class="product-price">${num(p.price_per_kg, 2)} <small>ج.م / كجم</small></div><button type="button" class="product-detail-link" data-details="${esc(p.id)}">تفاصيل التعبئة والغربلة <span aria-hidden="true">＋</span></button>${stock > 0
         ? `<div class="stock-note">المتاح: ${quantityLabel(stock)}</div><div class="kg-row"><input type="number" inputmode="decimal" min="0.001" step="0.001" value="1" data-qty="${esc(p.id)}" aria-label="الكمية المطلوبة من ${esc(p.name)}"><select data-unit="${esc(p.id)}" aria-label="وحدة الكمية"><option value="kg">كجم</option><option value="ton">طن</option></select><button class="button orange" data-add="${esc(p.id)}">أضف للسلة</button></div>`
         : `<div class="stock-note out">غير متاح حاليًا</div>`}</div></article>`;
     }).join("") || '<p class="empty-catalog">لا توجد محاصيل مطابقة. جرّب كلمة بحث أو تصنيفًا آخر.</p>';
@@ -78,6 +77,19 @@ export function initStore() {
       else image.onerror();
     }));
     $$("[data-add]", grid).forEach((b) => (b.onclick = () => addItem(b.dataset.add, $(`[data-qty="${b.dataset.add}"]`, grid).value, $(`[data-unit="${b.dataset.add}"]`, grid).value)));
+    $$('[data-details]', grid).forEach((b) => (b.onclick = () => showProductDetails(b.dataset.details)));
+  }
+
+  function showProductDetails(id) {
+    const product = products.find((p) => String(p.id) === String(id));
+    if (!product) return;
+    const details = String(product.description || "").trim().split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+    const inStock = Number(product.stock_kg) > 0;
+    $("#product-details-body").innerHTML = `<div class="product-details-layout"><div class="product-details-image"><img src="${esc(img(product))}" alt="${esc(product.name)}"></div><div class="product-details-copy"><div class="eyebrow"><i></i> من منتجات الأمين</div><h2>${esc(product.name)}</h2><p class="product-details-price">${money(product.price_per_kg)} <small>للكيلو</small></p><p class="product-details-stock">المتاح بالمخزن: ${quantityLabel(product.stock_kg)}</p><h3>التعبئة والغربلة</h3>${details.length ? `<div class="product-details-description">${details.map((line) => `<p>${esc(line)}</p>`).join("")}</div>` : '<p class="product-details-empty">المتجر لم يضف بعد وزن الشكارة ومراحل الغربلة والتعبئة لهذا الصنف.</p>'}<div class="product-detail-actions">${inStock ? `<button type="button" class="button orange" data-detail-add="${esc(product.id)}">اختيار الكمية</button>` : '<span class="stock-note out">غير متاح حاليًا</span>'}<button type="button" class="button forest" data-detail-close>إغلاق</button></div></div></div>`;
+    const dialog = $("#product-details-dialog");
+    dialog.showModal();
+    $$('[data-detail-close]', dialog).forEach((button) => (button.onclick = () => dialog.close()));
+    $("[data-detail-add]", dialog).onclick = () => { dialog.close(); $("#products").scrollIntoView({ behavior: "smooth" }); $(`[data-qty="${CSS.escape(String(id))}"]`)?.focus({ preventScroll: true }); };
   }
 
   const getCart = () => Object.entries(cart).map(([id, kg]) => ({ product: products.find((p) => String(p.id) === String(id)), kg })).filter((x) => x.product && x.kg > 0);
@@ -94,6 +106,7 @@ export function initStore() {
   function drawCart() {
     const items = getCart(), sum = cartTotal();
     $("#cart-count").textContent = num(items.length, 0);
+    const mobileCartCount = $("#mobile-cart-count"); if (mobileCartCount) mobileCartCount.textContent = num(items.length, 0);
     $("#cart-total").textContent = money(sum); $("#checkout-total").textContent = money(sum);
     $("#cart-items").innerHTML = items.length ? items.map(({ product: p, kg }) => {
       const displayQty = formatKg(kg), unit = displayQty.unit === "طن" ? "ton" : "kg";
@@ -116,12 +129,14 @@ export function initStore() {
   }
 
   const shade = $("#shade"), cartPanel = $("#cart-panel");
-  $("#cart-button").onclick = () => { cartPanel.classList.add("open"); shade.classList.add("open"); };
+  const openCart = () => { cartPanel.classList.add("open"); shade.classList.add("open"); };
+  $("#cart-button").onclick = openCart;
+  $("#mobile-cart-button").onclick = openCart;
   function closeCart() { cartPanel.classList.remove("open"); shade.classList.remove("open"); }
   shade.onclick = closeCart; $("[data-close-cart]").onclick = closeCart;
   $("#checkout-button").onclick = () => { if (!getCart().length) return notify("أضف منتجات للسلة الأول"); closeCart(); $("#checkout-dialog").showModal(); };
   $$("[data-close-dialog]").forEach((b) => (b.onclick = () => b.closest("dialog").close()));
-  $$('input[name="phone"]').forEach((i) => (i.oninput = () => { i.value = normalizePhone(i.value).slice(0, 15); }));
+  $$('input[name="phone"]').forEach((i) => (i.oninput = () => { i.value = normalizePhone(i.value); }));
 
   let submitting = false;
   $("#checkout-form").onsubmit = async (e) => {
@@ -337,16 +352,17 @@ export function initStore() {
       }));
     } else {
       if (!products.length) await fetchProducts();
-      area.innerHTML = products.map((p) => `<div class="product-edit"><input data-name="${esc(p.id)}" value="${esc(p.name)}" aria-label="الاسم"><label>ج.م/كجم<input type="number" step="0.01" min="0" data-price="${esc(p.id)}" value="${p.price_per_kg ?? ""}"></label><label>المخزون كجم<input type="number" step="0.001" min="0" data-stock="${esc(p.id)}" value="${p.stock_kg ?? 0}"></label><button data-save="${esc(p.id)}">حفظ</button></div>`).join("") + '<p class="product-desc">عدّل الاسم والسعر لكل كيلو والمخزون المتبقي بالكيلو (حتى ٣ أرقام عشرية).</p><button class="under-link" id="staff-logout">تسجيل الخروج</button>';
+      area.innerHTML = products.map((p) => `<div class="product-edit"><input data-name="${esc(p.id)}" value="${esc(p.name)}" aria-label="الاسم"><label>ج.م/كجم<input type="number" step="0.01" min="0" data-price="${esc(p.id)}" value="${p.price_per_kg ?? ""}"></label><label>المخزون كجم<input type="number" step="0.001" min="0" data-stock="${esc(p.id)}" value="${p.stock_kg ?? 0}"></label><button data-save="${esc(p.id)}">حفظ</button><label class="product-edit-description">تفاصيل وزن الشكارة والغربلة والتعبئة<textarea data-description="${esc(p.id)}" rows="3" placeholder="مثال: وزن الشكارة: ...&#10;مراحل الغربلة: ...&#10;شكل التعبئة: ...">${esc(p.description || "")}</textarea></label></div>`).join("") + '<p class="product-desc">أضف التفاصيل الصحيحة لكل صنف، وستظهر للعميل عند فتح «تفاصيل التعبئة والغربلة».</p><button class="under-link" id="staff-logout">تسجيل الخروج</button>';
       $$("[data-save]", area).forEach((b) => (b.onclick = async () => {
         const id = b.dataset.save, name = $(`[data-name="${id}"]`, area).value.trim();
         const priceRaw = $(`[data-price="${id}"]`, area).value.trim();
         const price = Math.round(Number(priceRaw) * 100) / 100;
         const stockRaw = $(`[data-stock="${id}"]`, area).value.trim(), stock = stockRaw === "0" ? 0 : parseKg(stockRaw);
         if (!name || priceRaw === "" || !Number.isFinite(price) || price < 0 || stock === null) return notify("راجع القيم: اكتب السعر والمخزون، ويمكن أن يكون المخزون صفرًا.");
-        const { error } = await db.from("products").update({ name, price_per_kg: price, stock_kg: stock }).eq("id", id);
+        const description = $(`[data-description="${id}"]`, area).value.trim();
+        const { error } = await db.from("products").update({ name, price_per_kg: price, stock_kg: stock, description }).eq("id", id);
         if (error) return notify("تعذر حفظ التعديل.");
-        products = products.map((p) => (String(p.id) === id ? { ...p, name, price_per_kg: price, stock_kg: stock } : p));
+        products = products.map((p) => (String(p.id) === id ? { ...p, name, price_per_kg: price, stock_kg: stock, description } : p));
         if (stock === 0) delete cart[id]; else if (cart[id] > stock) cart[id] = stock;
         saveCart(); drawProducts(); notify("المنتج اتحدث");
       }));
