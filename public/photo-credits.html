@@ -4,22 +4,96 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#faf9f3">
-  <title>مصادر صور المحاصيل | الأمين</title>
+  <meta name="description" content="مصادر وتراخيص الصور التوضيحية لمحاصيل متجر الأمين.">
+  <title>صور محاصيل الأمين ومصادرها</title>
   <style>
-    :root{font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif;color:#252c23;background:#faf9f3;font-synthesis:none;text-rendering:optimizeLegibility}body{max-width:820px;margin:0 auto;padding:36px 20px 64px;line-height:1.8}a{color:#78412c}h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.25;margin:12px 0}p{color:#555e53}.back{display:inline-flex;margin:12px 0 28px}.grid{display:grid;gap:12px;margin-top:30px}.item{background:#fffefb;border:1px solid #e5e4da;border-radius:16px;padding:18px}.item h2{font-size:1.15rem;margin:0 0 6px}.item p{margin:0}.item a{word-break:break-word}small{color:#676e63}
+    :root {
+      color-scheme: light;
+      --cream: #faf9f3;
+      --paper: #fffefb;
+      --ink: #252c23;
+      --green: #214733;
+      --orange: #b95b35;
+      --muted: #676e63;
+      --line: #dedfd4;
+      --shadow: 0 18px 50px rgb(35 55 37 / 9%);
+      font-family: "IBM Plex Sans Arabic", Tahoma, Arial, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+    * { box-sizing: border-box; }
+    body { min-width: 320px; margin: 0; line-height: 1.8; }
+    a { color: inherit; }
+    .topline { padding: 7px 18px; background: var(--green); color: #f6f2e5; text-align: center; font-size: 12px; }
+    .topline span { margin-inline: 8px; color: #e7ae79; }
+    .header { min-height: 78px; padding: 12px max(calc((100vw - 1160px) / 2), 5vw); display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--line); }
+    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--green); text-decoration: none; font-size: 20px; font-weight: 700; line-height: 1.2; }
+    .brand-mark { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 50% 50% 4px 50%; background: var(--green); color: var(--cream); font-size: 22px; }
+    .brand small { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; font-weight: 400; }
+    .back { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 15px; border: 1px solid #c8cdbf; border-radius: 3px; color: var(--green); font-size: 14px; font-weight: 600; text-decoration: none; transition: background .18s ease, color .18s ease; }
+    .back:hover { background: var(--green); color: white; }
+    main { width: min(1160px, calc(100% - 40px)); margin: 0 auto; padding: clamp(42px, 7vw, 88px) 0 86px; }
+    .intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 330px); align-items: end; gap: 36px; margin-bottom: 34px; }
+    .eyebrow { display: flex; align-items: center; gap: 9px; color: var(--orange); font-size: 13px; font-weight: 600; }
+    .eyebrow i { width: 22px; height: 1px; background: var(--orange); }
+    h1 { max-width: 700px; margin: 13px 0 12px; color: var(--green); font-size: clamp(36px, 5.5vw, 64px); font-weight: 600; line-height: 1.25; letter-spacing: -.035em; }
+    .intro p { max-width: 650px; margin: 0; color: var(--muted); font-size: 16px; }
+    .note { margin: 0; padding: 16px 18px; border-inline-start: 3px solid var(--orange); background: #f0f0e7; color: #525b4f; font-size: 13px; line-height: 1.8; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .card { min-width: 0; overflow: hidden; border: 1px solid #e4e4d9; background: var(--paper); box-shadow: 0 5px 18px rgb(35 55 37 / 4%); transition: transform .2s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .photo { aspect-ratio: 1.42; overflow: hidden; background: #eeeee4; }
+    .photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+    .card:hover .photo img { transform: scale(1.03); }
+    .card-body { padding: 17px 18px 19px; }
+    .card h2 { margin: 0 0 7px; color: var(--green); font-size: 18px; line-height: 1.5; }
+    .card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .links { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 15px; margin-top: 13px; }
+    .links a { color: #87462e; font-size: 12px; font-weight: 600; text-underline-offset: 3px; }
+    .license { display: inline-flex; padding: 3px 8px; border: 1px solid #e6e4d8; border-radius: 20px; color: #4f5e4b !important; font-size: 11px !important; font-weight: 500 !important; text-decoration: none; }
+    .card small { display: block; margin-top: 9px; color: #777b70; font-size: 11px; line-height: 1.7; }
+    footer { padding: 23px 20px; border-top: 1px solid var(--line); color: var(--muted); text-align: center; font-size: 12px; }
+    footer a { color: var(--green); font-weight: 600; text-underline-offset: 3px; }
+    a:focus-visible { outline: 3px solid #bb693f; outline-offset: 3px; }
+    @media (max-width: 850px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .intro { grid-template-columns: 1fr; gap: 18px; } .note { max-width: 640px; } }
+    @media (max-width: 560px) { .topline { font-size: 11px; } .header { min-height: 66px; padding-inline: 16px; } .brand { font-size: 18px; } .brand-mark { width: 36px; height: 36px; font-size: 19px; } .brand small { font-size: 10px; } .back { min-height: 40px; padding-inline: 10px; font-size: 12px; white-space: nowrap; } main { width: calc(100% - 32px); padding-block: 40px 55px; } .intro { gap: 14px; margin-bottom: 22px; } h1 { font-size: clamp(34px, 10vw, 45px); } .intro p { font-size: 14px; } .note { padding: 12px 14px; font-size: 12px; } .grid { grid-template-columns: 1fr; gap: 13px; } .photo { aspect-ratio: 1.7; } .card-body { padding: 14px 15px 16px; } .card h2 { font-size: 16px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
   </style>
 </head>
 <body>
-  <a class="back" href="/">← العودة إلى متجر الأمين</a>
-  <h1>مصادر صور المحاصيل</h1>
-  <p>صور توضيحية من Wikimedia Commons. الصورة توضح نوع المحصول، وقد تختلف عن شكل العبوة أو درجة التحميص الفعلية.</p>
-  <div class="grid">
-    <section class="item"><h2>لب سوري بقشره</h2><p><a href="https://commons.wikimedia.org/wiki/File:Whole_Sunflower_seed.jpg">Whole Sunflower seed</a> — Bobyellow، <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>.</p></section>
-    <section class="item"><h2>لب أبيض جامبو</h2><p><a href="https://commons.wikimedia.org/wiki/File:Sunflower_seeds_-_white._img_09.jpg">Sunflower seeds - white. img 09</a> — Dmitry Makeev، <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>.</p></section>
-    <section class="item"><h2>لب قرع</h2><p><a href="https://commons.wikimedia.org/wiki/File:Pumpkin_Seeds_macro_1.jpg">Pumpkin Seeds macro 1</a> — Daniel Schwen، <a href="https://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.</p></section>
-    <section class="item"><h2>فول سوداني بلدي</h2><p><a href="https://commons.wikimedia.org/wiki/File:Peanuts_(24285094049).jpg">Peanuts (24285094049)</a> — NIAID، <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>.</p></section>
-    <section class="item"><h2>حمص محمص</h2><p><a href="https://commons.wikimedia.org/wiki/File:Maah_korai.jpg">Maah korai</a> — NabaJyoti، <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>.</p><small>الصورة توضيحية لصنف حمص؛ محتوى الطبق في الصورة قد يتضمن مكونات إضافية.</small></section>
-    <section class="item"><h2>ذرة فشار بلدي</h2><p><a href="https://commons.wikimedia.org/wiki/File:Maize_Corn.jpg">Maize Corn</a> — Joel Penner، <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>.</p></section>
-  </div>
+  <div class="topline">الأمين <span aria-hidden="true">✳</span> محاصيل ولب بالجملة</div>
+  <header class="header">
+    <a class="brand" href="/" data-store-home aria-label="الأمين، الصفحة الرئيسية"><span class="brand-mark">أ</span><span>الأمين<small>محاصيل ولب بالجملة</small></span></a>
+    <a class="back" href="/" data-store-home>العودة للمتجر <span aria-hidden="true">←</span></a>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div><div class="eyebrow"><i></i> شفافية في مصادر الصور</div><h1 id="page-title">صور المحاصيل ومصادرها</h1><p>نوضح هنا أصحاب الصور وتراخيص استخدامها. اضغط على اسم الصورة لزيارة صفحتها الأصلية.</p></div>
+      <p class="note">الصور للعرض التوضيحي لنوع المحصول. قد يختلف شكلها عن المنتج الفعلي أو درجة تحميصه، لذلك لا تُستخدم كصورة للعبوة.</p>
+    </section>
+    <div class="grid">
+      <article class="card"><div class="photo"><img src="assets/products/photo-f86937728-500.jpg" alt="بذور دوار الشمس بقشرتها" loading="lazy"></div><div class="card-body"><h2>لب سوري بقشره</h2><p>الصورة: Whole Sunflower seed — Bobyellow</p><div class="links"><a href="https://commons.wikimedia.org/wiki/File:Whole_Sunflower_seed.jpg" target="_blank" rel="noreferrer">مشاهدة المصدر ↗</a><a class="license" href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noreferrer">CC BY-SA 4.0</a></div></div></article>
+      <article class="card"><div class="photo"><img src="assets/products/photo-f85644637-500.jpg" alt="لب دوار الشمس الأبيض" loading="lazy"></div><div class="card-body"><h2>لب أبيض جامبو</h2><p>الصورة: Sunflower seeds - white. img 09 — Dmitry Makeev</p><div class="links"><a href="https://commons.wikimedia.org/wiki/File:Sunflower_seeds_-_white._img_09.jpg" target="_blank" rel="noreferrer">مشاهدة المصدر ↗</a><a class="license" href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noreferrer">CC BY-SA 4.0</a></div></div></article>
+      <article class="card"><div class="photo"><img src="assets/products/photo-f29509141-500.jpg" alt="بذور قرع" loading="lazy"></div><div class="card-body"><h2>لب قرع</h2><p>الصورة: Pumpkin Seeds macro 1 — Daniel Schwen</p><div class="links"><a href="https://commons.wikimedia.org/wiki/File:Pumpkin_Seeds_macro_1.jpg" target="_blank" rel="noreferrer">مشاهدة المصدر ↗</a><a class="license" href="https://creativecommons.org/licenses/by/3.0" target="_blank" rel="noreferrer">CC BY 3.0</a></div></div></article>
+      <article class="card"><div class="photo"><img src="assets/products/photo-f62609564-500.jpg" alt="فول سوداني" loading="lazy"></div><div class="card-body"><h2>فول سوداني بلدي</h2><p>الصورة: Peanuts (24285094049) — NIAID</p><div class="links"><a href="https://commons.wikimedia.org/wiki/File:Peanuts_(24285094049).jpg" target="_blank" rel="noreferrer">مشاهدة المصدر ↗</a><a class="license" href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noreferrer">CC BY 2.0</a></div></div></article>
+      <article class="card"><div class="photo"><img src="assets/products/photo-f87521449-500.jpg" alt="طبق حمص محمص" loading="lazy"></div><div class="card-body"><h2>حمص محمص</h2><p>الصورة: Maah korai — NabaJyoti</p><div class="links"><a href="https://commons.wikimedia.org/wiki/File:Maah_korai.jpg" target="_blank" rel="noreferrer">مشاهدة المصدر ↗</a><a class="license" href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noreferrer">CC BY-SA 4.0</a></div><small>الصورة توضيحية؛ الطبق قد يحتوي على مكونات إضافية.</small></div></article>
+      <article class="card"><div class="photo"><img src="assets/products/photo-f9506024-500.jpg" alt="حبوب ذرة" loading="lazy"></div><div class="card-body"><h2>ذرة فشار بلدي</h2><p>الصورة: Maize Corn — Joel Penner</p><div class="links"><a href="https://commons.wikimedia.org/wiki/File:Maize_Corn.jpg" target="_blank" rel="noreferrer">مشاهدة المصدر ↗</a><a class="license" href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noreferrer">CC BY 2.0</a></div></div></article>
+    </div>
+  </main>
+  <footer>© <span id="year"></span> الأمين · <a href="/" data-store-home>ارجع لمتجر المحاصيل</a></footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    if (location.protocol === "file:") {
+      document.querySelectorAll("[data-store-home]").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          if (history.length > 1) history.back();
+          else link.textContent = "افتح رابط المتجر المنشور للعودة إلى الصفحة الرئيسية";
+        });
+      });
+    }
+  </script>
 </body>
 </html>
